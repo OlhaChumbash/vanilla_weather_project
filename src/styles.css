@@ -1,0 +1,133 @@
+body {
+    background-color: #f9f7fe;
+    display: block;
+    margin: 8px;
+    font-family: "Exo", sans-serif;
+  }
+  
+  header {
+    display: block;
+    border-bottom: 1px solid #39c9ff;
+    padding: 0 0 30px 0;
+  }
+  
+  main {
+    padding: 30px 0;
+    display: block;
+  }
+  
+  .searchFormInput {
+    background-color: #f9f7fe;
+    border: none;
+    border-radius: 6px;
+    width: 80%;
+    font-size: 16px;
+    padding: 15px 20px;
+  }
+  
+  .searchFormButton {
+    background: #ffe168;
+    padding: 15px 30px;
+    border: none;
+    font-size: 15px;
+    margin-left: 5px;
+    border-radius: 6px;
+    color: white;
+  }
+  
+  .weatherApp {
+    background: white;
+    max-width: 600px;
+    margin: 45px auto;
+    box-shadow: 0 30px 50px rgba(65, 50, 100, 0.08);
+    border-radius: 16px;
+    padding: 30px;
+  }
+  
+  .weatherAppData {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .weatherAppCity {
+    font-size: 38px;
+    line-height: 48px;
+    margin: 0;
+  }
+  
+  .weatherAppDetails {
+    color: rgba(39, 33, 66, 0.4);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    display: block;
+  }
+  
+  .weatherAppDetails strong {
+    color: #39c9ff;
+  }
+  
+  .weatherAppContainer {
+    display: flex;
+  }
+  
+  .weatherAppIcon {
+    height: 88px;
+    width: 88px;
+  }
+  
+  .weatherAppTemp {
+    font-size: 88px;
+    font-weight: bold;
+    line-height: 88px;
+    display: block;
+  }
+  
+  .weatherAppUnit {
+    font-size: 28px;
+    margin-top: 6px;
+  }
+  
+  .weatherForecast {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+  }
+  
+  .weatherForecastDate {
+    text-align: center;
+    color: rgba(39, 33, 66, 0.4);
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .weatherForecastIcon {
+    width: 75px;
+    text-align: center;
+  }
+  
+  .weatherForecastTemperatures {
+    text-align: center;
+    color: #c557b3;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .weatherForecastTemperature {
+    padding: 0 10px;
+  }
+  
+  footer {
+    border-top: 1px solid #39c9ff;
+    padding: 30px 0 0 0;
+    text-align: center;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  a {
+    color: rgb(22, 201, 73);
+  }
+  
