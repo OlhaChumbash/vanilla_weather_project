@@ -104,5 +104,5 @@ function updateWeather(response) {
   let searchFormElement = document.querySelector("#searchForm");
   searchFormElement.addEventListener("submit", handleSearchSubmit);
   
-  searchCity("Paris");
+  searchCity("Chemnitz");
   
