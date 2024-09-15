@@ -1,107 +1,97 @@
+const WEATHER_API_KEY = "e8400d96ae4c408oeba366efc6133t5f";
+const FORECAST_API_KEY = "e30to1ab37b3986111e09fa174072f0d";
+
 function updateWeather(response) {
-    let temperatureElement = document.querySelector("#temperature");
-    let temperature = response.data.temperature.current;
-    let cityElement = document.querySelector("#city");
-    let descriptionElement = document.querySelector("#description");
-    let humidityElement = document.querySelector("#humidity");
-    let windSpeedElement = document.querySelector("#wind-speed");
-    let timeElement = document.querySelector("#time");
-    let date = new Date(response.data.time * 1000);
-    let weatherIconElement = document.querySelector("#weather-icon");
-  
-    cityElement.innerHTML = response.data.city;
-    timeElement.innerHTML = formatDate(date);
-    descriptionElement.innerHTML = response.data.condition.description;
-    humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
-    windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
-    temperatureElement.innerHTML = Math.round(temperature);
-    weatherIconElement.innerHTML = `<img src = "${response.data.condition.icon_url}" class="weather-app-icon" />`;
-  
-    getForecast(response.data.city);
-  }
-  
-  function formatDate(date) {
-    let minutes = date.getMinutes();
-    let hours = date.getHours();
-    let days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    let day = days[date.getDay()];
-  
-    if (minutes < 10) {
-      minutes = `0${minutes}`;
+    const { data } = response;
+    if (!data || data.status === "not_found") {
+        alert("City not found. Please try again.");
+        return; 
     }
+
+    const { city, condition, temperature, wind, time } = data;
+    const date = new Date(time * 1000);
+    
+    document.querySelector("#city").innerHTML = city;
+    document.querySelector("#time").innerHTML = formatDate(date);
+    document.querySelector("#description").innerHTML = condition.description;
+    document.querySelector("#humidity").innerHTML = `${temperature.humidity}%`;
+    document.querySelector("#wind-speed").innerHTML = `${wind.speed}km/h`;
+    document.querySelector("#temperature").innerHTML = Math.round(temperature.current);
+    document.querySelector("#weather-icon").innerHTML = `<img src="${condition.icon_url}" class="weather-app-icon" />`;
   
-    return `${day} ${hours} ${minutes}`;
-  }
-  
-  function searchCity(city) {
-    let apiKey = "e8400d96ae4c408oeba366efc6133t5f";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(updateWeather);
-  }
-  
-  function handleSearchSubmit(event) {
+    getForecast(city);
+}
+
+function formatDate(date) {
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const hours = date.getHours();
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const day = days[date.getDay()];
+
+    return `${day} ${hours}:${minutes}`;
+}
+
+function searchCity(city) {
+    const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${WEATHER_API_KEY}&units=metric`;
+    return axios.get(apiUrl);
+}
+
+function handleSearchSubmit(event) {
     event.preventDefault();
-    let searchInput = document.querySelector("#search-form-input");
-    let cityElement = document.querySelector("#city");
-    cityElement.innerHTML = searchInput.value;
+    const searchInput = document.querySelector("#search-form-input").value.trim();
   
-    searchCity(searchInput.value);
-  }
-  
-  function formatDay(timestamp) {
-    let date = new Date(timestamp * 1000);
-    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  
+    if (searchInput === "") {
+        alert("Please enter a city.");
+        return;
+    }
+
+    searchCity(searchInput).then(updateWeather).catch(handleError);
+}
+
+function formatDay(timestamp) {
+    const date = new Date(timestamp * 1000);
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     return days[date.getDay()];
-  }
-  
-  function getForecast(city) {
-    let apiKey = "e30to1ab37b3986111e09fa174072f0d";
-    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
-    axios(apiUrl).then(displayForecast);
-  }
-  
-  function displayForecast(response) { 
-  
-    let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
-    let forecastHtml = "";
-  
-    response.data.daily.forEach(function (day, index) {
-      if (index < 5)
-        forecastHtml =
-          forecastHtml +
-          `
+}
+
+function getForecast(city) {
+    const apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${FORECAST_API_KEY}&units=metric`;
+    axios.get(apiUrl).then(displayForecast).catch(() => alert("Error retrieving forecast data. Please try again."));
+}
+
+function displayForecast(response) {
+    if (!response || !response.data || !response.data.daily) {
+        alert("Error retrieving forecast data. Please try again.");
+        return;
+    }
+
+    const forecastHtml = response.data.daily.slice(0, 5).map(day => `
         <div class="weather-forecast-day">
-          <div class="weather-forecast-date">${formatDay(day.time)}</div>
-          <div>  
-            <img src="${day.condition.icon_url}" class="weather-forecast-icon" />
-          </div>
-          <div class="weather-forecast-box">
-            <div class="weather-forecast-temperature">
-              <strong>${Math.round(day.temperature.maximum)}°</strong>
+            <div class="weather-forecast-date">${formatDay(day.time)}</div>
+            <div>  
+                <img src="${day.condition.icon_url}" class="weather-forecast-icon" />
             </div>
-            <div class="weather-forecast-temperature">${Math.round(
-              day.temperature.minimum
-            )}°</div>
-          </div>
+            <div class="weather-forecast-box">
+                <div class="weather-forecast-temperature">
+                    <strong>${Math.round(day.temperature.maximum)}°</strong>
+                </div>
+                <div class="weather-forecast-temperature">${Math.round(day.temperature.minimum)}°</div>
+            </div>
         </div>
-      `;
-    });
-  
-    let forecastElement = document.querySelector("#forecast");
-    forecastElement.innerHTML = forecastHtml;
-  }
-  
-  let searchFormElement = document.querySelector("#search-form");
-  searchFormElement.addEventListener("submit", handleSearchSubmit);
-  
-  searchCity("Chemnitz");
-  
+    `).join('');
+
+    document.querySelector("#forecast").innerHTML = forecastHtml;
+}
+
+function handleError(error) {
+    if (error.response && error.response.data.status === "not_found") {
+        alert("City not found. Please try again.");
+    } else {
+        alert("An error occurred. Please try again later.");
+    }
+}
+
+document.querySelector("#search-form").addEventListener("submit", handleSearchSubmit);
+
+
+searchCity("Chemnitz").then(updateWeather).catch(handleError);
