@@ -14,36 +14,43 @@
     <title>My weather application</title>
   </head>
   <body>
-    <div class="weather-app">
-      <header>
-        <form id="search-form">
-          <input
-            type="search"
-            placeholder="Enter a city.."
-            required
-            class="search-input"
-            id="search-input"
-          />
-          <input type="submit" value="Search" class="search-button" />
-        </form>
-      </header>
-      <main>
-        <div class="current-weather">
-          <div>
-            <h1 class="current-city" id="current-city">Paris</h1>
-            <p class="current-details">
-              <span id="current-date"></span>, moderate rain <br />
-              Humidity: <strong>87%</strong>, Wind: <strong>7.2km/h</strong>
-            </p>
+    <div class="weatherApp">
+        <header>
+          <form class="searchForm" id="searchForm">
+            <input
+              type="search"
+              placeholder="Enter a City..."
+              required
+              class="searchFormInput"
+              id="searchFormInput"
+            />
+            <input type="submit" value="Search" class="searchFormButton" />
+          </form>
+        </header>
+        <main>
+          <div class="weatherAppData">
+            <div>
+              <h1 class="weatherAppCity" id="city"></h1>
+              <p class="weatherAppDetails">
+                <span id="time"> Monday 14:43 </span>,
+                <span id="description"> broken clouds </span><br />
+                Humidity: <strong id="humidity"> 61% </strong>, Wind:
+                <strong id="windSpeed"> 5.66km/h </strong>
+              </p>
+            </div>
+            <div class="weatherAppContainer">
+              <div id="weatherIcon">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/9546/9546618.png"
+                  class="weatherAppIcon"
+                />
+              </div>
+              <div class="weatherAppTemp" id="temperature"></div>
+              <div class="weatherAppUnit">℃</div>
+            </div>
           </div>
-          <div class="current-temperature">
-            <span class="current-temperature-icon">☀️</span
-            ><span class="current-temperature-value" id="current-temperature"
-              >24</span
-            ><span class="current-temperature-unit">°C</span>
-          </div>
-        </div>
-      </main>
+          <div class="weatherForecast" id="forecast"></div>
+        </main>
       <footer>
         <p>
           This project was coded by
