@@ -4,10 +4,10 @@ function updateWeather(response) {
     let cityElement = document.querySelector("#city");
     let descriptionElement = document.querySelector("#description");
     let humidityElement = document.querySelector("#humidity");
-    let windSpeedElement = document.querySelector("#windSpeed");
+    let windSpeedElement = document.querySelector("#wind-speed");
     let timeElement = document.querySelector("#time");
     let date = new Date(response.data.time * 1000);
-    let weatherIconElement = document.querySelector("#weatherIcon");
+    let weatherIconElement = document.querySelector("#weather-icon");
   
     cityElement.innerHTML = response.data.city;
     timeElement.innerHTML = formatDate(date);
@@ -15,7 +15,7 @@ function updateWeather(response) {
     humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
     windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
     temperatureElement.innerHTML = Math.round(temperature);
-    weatherIconElement.innerHTML = `<img src = "${response.data.condition.icon_url}" class="weatherAppIcon" />`;
+    weatherIconElement.innerHTML = `<img src = "${response.data.condition.icon_url}" class="weather-app-icon" />`;
   
     getForecast(response.data.city);
   }
@@ -49,7 +49,7 @@ function updateWeather(response) {
   
   function handleSearchSubmit(event) {
     event.preventDefault();
-    let searchInput = document.querySelector("#searchFormInput");
+    let searchInput = document.querySelector("#search-form-input");
     let cityElement = document.querySelector("#city");
     cityElement.innerHTML = searchInput.value;
   
@@ -69,8 +69,7 @@ function updateWeather(response) {
     axios(apiUrl).then(displayForecast);
   }
   
-  function displayForecast(response) {
-    console.log(response.data);
+  function displayForecast(response) { 
   
     let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
     let forecastHtml = "";
@@ -80,16 +79,16 @@ function updateWeather(response) {
         forecastHtml =
           forecastHtml +
           `
-        <div class="weatherForecastDay">
-          <div class="weatherForecastDate">${formatDay(day.time)}</div>
+        <div class="weather-forecast-day">
+          <div class="weather-forecast-date">${formatDay(day.time)}</div>
           <div>  
-            <img src="${day.condition.icon_url}" class="weatherForecastIcon" />
+            <img src="${day.condition.icon_url}" class="weather-forecast-icon" />
           </div>
-          <div class="weatherForecastTemperatures">
-            <div class="weatherForecastTemperature">
+          <div class="weather-forecast-box">
+            <div class="weather-forecast-temperature">
               <strong>${Math.round(day.temperature.maximum)}°</strong>
             </div>
-            <div class="weatherForecastTemperature">${Math.round(
+            <div class="weather-forecast-temperature">${Math.round(
               day.temperature.minimum
             )}°</div>
           </div>
@@ -101,7 +100,7 @@ function updateWeather(response) {
     forecastElement.innerHTML = forecastHtml;
   }
   
-  let searchFormElement = document.querySelector("#searchForm");
+  let searchFormElement = document.querySelector("#search-form");
   searchFormElement.addEventListener("submit", handleSearchSubmit);
   
   searchCity("Chemnitz");
