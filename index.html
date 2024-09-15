@@ -14,42 +14,42 @@
     <title>Weather application</title>
   </head>
   <body>
-    <div class="weatherApp">
+    <div class="weather-app">
         <header>
-          <form class="searchForm" id="searchForm">
+          <form class="search-form" id="search-form">
             <input
               type="search"
               placeholder="Enter a City..."
               required
-              class="searchFormInput"
-              id="searchFormInput"
+              class="search-form-input"
+              id="search-form-input"
             />
-            <input type="submit" value="Search" class="searchFormButton" />
+            <input type="submit" value="Search" class="search-form-button" />
           </form>
         </header>
         <main>
-          <div class="weatherAppData">
+          <div class="weather-app-data">
             <div>
-              <h1 class="weatherAppCity" id="city"></h1>
-              <p class="weatherAppDetails">
+              <h1 class="weather-app-city" id="city"></h1>
+              <p class="weather-app-details">
                 <span id="time"> Monday 14:43 </span>,
                 <span id="description"> broken clouds </span><br />
                 Humidity: <strong id="humidity"> 61% </strong>, Wind:
-                <strong id="windSpeed"> 5.66km/h </strong>
+                <strong id="wind-speed"> 5.66km/h </strong>
               </p>
             </div>
-            <div class="weatherAppContainer">
-              <div id="weatherIcon">
+            <div class="weather-app-container">
+              <div id="weather-icon">
                 <img
                   src="https://cdn-icons-png.flaticon.com/128/9546/9546618.png"
-                  class="weatherAppIcon"
+                  class="weather-app-icon"
                 />
               </div>
-              <div class="weatherAppTemp" id="temperature"></div>
-              <div class="weatherAppUnit">℃</div>
+              <div class="weather-app-temp" id="temperature"></div>
+              <div class="weather-app-unit">℃</div>
             </div>
           </div>
-          <div class="weatherForecast" id="forecast"></div>
+          <div class="weather-forecast" id="forecast"></div>
         </main>
       <footer>
         <p>
