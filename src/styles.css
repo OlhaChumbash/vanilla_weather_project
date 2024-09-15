@@ -60,20 +60,21 @@ body {
   .weather-app-city {
     font-size: 22px;
     line-height: 48px;
+    margin-bottom: 0;
   }
-
-  .weather-dpp-city {
-    font-size: 28px;
-    line-height: 36px;
+  .weather-app-country{
     margin: 0;
+    font-size: 14px;
+    color: rgba(39, 33, 66, 0.4);
   }
-  
+ 
   .weather-app-details {
     color: rgba(39, 33, 66, 0.4);
     font-size: 12px;
     font-weight: 500;
     line-height: 18px;
     margin: 10px 0;
+    text-align: start;
   }
   
   .weather-app-details strong {
@@ -174,7 +175,10 @@ body {
       font-size: 38px;
       line-height: 48px;
     }
-  
+    .weather-app-country{       
+        font-size: 18px;     
+    }
+
     .weather-app-details {
       font-size: 16px;
       line-height: 24px;
