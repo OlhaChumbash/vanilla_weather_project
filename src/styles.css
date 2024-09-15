@@ -26,7 +26,7 @@ body {
   }
   
   .searchFormButton {
-    background: #ffe168;
+    background: #c557b3;
     padding: 15px 30px;
     border: none;
     font-size: 15px;
@@ -128,6 +128,8 @@ body {
   }
   
   a {
-    color: rgb(22, 201, 73);
+    color: #39c9ff;
+    font-weight: bold;
+    text-decoration: none;
   }
   
