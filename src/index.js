@@ -8,10 +8,11 @@ function updateWeather(response) {
         return; 
     }
 
-    const { city, condition, temperature, wind, time } = data;
-    const date = new Date(time * 1000);
-    
+    const { city, country, condition, temperature, wind, time } = data;
+    const date = new Date(time * 1000); 
+
     document.querySelector("#city").innerHTML = city;
+    document.querySelector("#country").innerHTML = country;
     document.querySelector("#time").innerHTML = formatDate(date);
     document.querySelector("#description").innerHTML = condition.description;
     document.querySelector("#humidity").innerHTML = `${temperature.humidity}%`;
@@ -24,11 +25,11 @@ function updateWeather(response) {
 
 function formatDate(date) {
     const minutes = date.getMinutes().toString().padStart(2, '0');
-    const hours = date.getHours();
+    const hours = date.getHours().toString().padStart(2, '0');
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const day = days[date.getDay()];
 
-    return `${day} ${hours}:${minutes}`;
+     return `${day} ${hours}:${minutes}`;
 }
 
 function searchCity(city) {
